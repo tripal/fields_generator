@@ -102,4 +102,9 @@ class Generator
 
         return true;
     }
+
+    public function prompt()
+    {
+        return $this->prompt;
+    }
 }
