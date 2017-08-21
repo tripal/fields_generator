@@ -79,7 +79,7 @@ class Colors
             // Add string and end coloring
             $colored_string .= $string."\033[0m";
 
-            $full_string = PHP_EOL.'  '.$colored_padding.PHP_EOL;
+            $full_string = '  '.$colored_padding.PHP_EOL;
             $full_string .= '  '.$colored_string.PHP_EOL;
             $full_string .= '  '.$colored_padding;
         } else {

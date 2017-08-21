@@ -45,7 +45,9 @@ class CLIPrompt
      */
     public function ask($question)
     {
-        $response = readline($question);
+        while (empty($response = readline($question))) {
+           $this->error('Please provide a response');
+        }
 
         return $response;
     }

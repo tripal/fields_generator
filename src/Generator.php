@@ -79,7 +79,7 @@ class Generator
     /**
      * CLI Options mapped long form => shorthand form.
      * Read http://php.net/manual/en/function.getopt.php for more
-     * information about the optional vs required options.
+     * information about the optional vs required.
      *
      * @var array
      */
@@ -118,22 +118,11 @@ class Generator
     /**
      * Prompt the user and save answers then generate the files.
      *
-     * @return bool
+     * @return array
      */
     public function run()
     {
-        $this->prompt->line('
-        This helper will automate field assembly based on the controlled vocabulary (CV) and controlled vocabulary term (CVterm).
-        Ideally, every field should map to a controlled vocabulary (ontology) term.  If no term exists from a fitting CV, you can use the CV "local".
-        Additional help is available in the README, and at http://tripal.info/tutorials/v3.x/developers_handbook.
-       
-       
-        ***************************
-        ***************************
-        
-        
-        Please fill the following form to generate a Tripal Field.
-        ');
+        $this->printIntro();
 
         foreach ($this->questions as $question => $field) {
             $this->{$field} = $this->prompt->ask($question);
@@ -153,6 +142,22 @@ class Generator
     }
 
     /**
+     * Prints introduction message.
+     */
+    protected function printIntro()
+    {
+        $this->prompt->line('This helper will automate field assembly based on the controlled vocabulary (CV) and controlled vocabulary term (CVterm).');
+        $this->prompt->line('Ideally, every field should map to a controlled vocabulary (ontology) term.  If no term exists from a fitting CV, you can use the CV "local".');
+        $this->prompt->line('Additional help is available in the README, and at http://tripal.info/tutorials/v3.x/developers_handbook.');
+        $this->prompt->line('');
+        $this->prompt->line('***************************');
+        $this->prompt->line('***************************');
+        $this->prompt->line('');
+        $this->prompt->line('Please fill the following form to generate a Tripal Field.');
+        $this->prompt->line('');
+    }
+
+    /**
      * Generate the field files content by replacing the available variables.
      * This function does not create the directories and files.
      *
@@ -160,10 +165,10 @@ class Generator
      */
     protected function generate()
     {
-        $fields_stub = file_get_contents(__DIR__.'/../stubs/fields');
-        $class_stub = file_get_contents(__DIR__.'/../stubs/field_class');
-        $formatter_stub = file_get_contents(__DIR__.'/../stubs/field_formatter');
-        $widget_stub = file_get_contents(__DIR__.'/../stubs/field_widget');
+        $fields_stub = file_get_contents(__DIR__.' /../stubs / fields');
+        $class_stub = file_get_contents(__DIR__.' /../stubs / field_class');
+        $formatter_stub = file_get_contents(__DIR__.' /../stubs / field_formatter');
+        $widget_stub = file_get_contents(__DIR__.' /../stubs / field_widget');
 
         // Find and replace variables in stubs.
         // The structure of variables are $$name_of_var$$ and they correspond
@@ -195,8 +200,8 @@ class Generator
 
         // Field settings
         $fields_name = $this->module_name;
-        if($this->options->output) {
-            if(file_exists("{$path['includes']}/{$fields_name}.fields.inc")) {
+        if ($this->options->output) {
+            if (file_exists("{$path['includes']}/{$fields_name}.fields.inc")) {
                 $fields_name .= 'stub';
             }
         }
