@@ -40,7 +40,7 @@ Tripal Fields Generator will create four files that define your field.  For the 
 * The field widget, `local__example_widget.inc`
 
 Additionally, a fields file stub describing the fields declared in your module is generated: for this example module, the file might be  `tripal_example_module.fields.inc`.  Note that *all* of the fields in your module are described here: running TFG multiple times will require you to combine this file for each field.
-The final structure of your fields should look like the example below, with a given field `CV__CVTERM` in `module/includes/TripalFields/CV_CVterm`, and the `module.fields.inc` located in `module/includes`. For a full example of a field please visit the [Tripal Example Module repository](https://github.com/tripal/tripal_example) by @laceysanderson.
+The final structure of your fields should look like the example below, with a given field `CV__CVTERM` in `module/includes/TripalFields/CV_CVterm`, and the `module.fields.inc` located in `module/includes`. For a full example of a field please visit the [Tripal Example Module repository](https://github.com/tripal/tripal_example) by [@laceysanderson](https://github.com/laceysanderson).
 ```
 module/
 ├── includes/
