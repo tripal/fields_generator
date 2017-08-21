@@ -192,7 +192,13 @@ class Generator
         $path = $this->getFieldsDir();
 
         // Field settings
-        file_put_contents("{$path['includes']}/{$this->module_name}.fields.inc", $files['fields']);
+        $fields_name = $this->module_name;
+        if($this->options->output) {
+            if(file_exists("{$path['includes']}/{$fields_name}.fields.inc")) {
+                $fields_name .= 'stub';
+            }
+        }
+        file_put_contents("{$path['includes']}/{$fields_name}.fields.inc", $files['fields']);
 
         // Create the class files
         file_put_contents("{$path['field']}/{$this->field_name}.inc", $files['class']);
