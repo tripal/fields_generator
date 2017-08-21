@@ -55,7 +55,7 @@ function $$module_name$$_bundle_fields_info($entity_type, $bundle) {
       'cardinality' => 1,
       'locked' => FALSE,
       'storage' => array(
-        'type' => 'field_chado_storage',
+        'type' => 'tripal_no_storage',
       ),
     );
   }
@@ -87,7 +87,7 @@ function $$module_name$$_bundle_fields_info($entity_type, $bundle) {
  */
 function $$module_name$$_bundle_instances_info($entity_type, $bundle) {
   $instances = array();
-/**
+
   // ORGANISM.
   //===============
   if (isset($bundle->data_table) AND ($bundle->data_table == 'organism')) {
@@ -120,6 +120,6 @@ function $$module_name$$_bundle_instances_info($entity_type, $bundle) {
     );
 
   }
-*/
+
   return $instances;
 }

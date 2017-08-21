@@ -113,6 +113,7 @@ class Generator
         ];
         $this->prompt = new CLIPrompt();
         $this->options = new OptionsParser($this->mapped_options);
+        $this->validateOptions();
     }
 
     /**
@@ -142,6 +143,18 @@ class Generator
     }
 
     /**
+     * Validate options.
+     *
+     * @throws \Exception
+     */
+    protected function validateOptions()
+    {
+        if ($this->options->type && ! in_array(strtolower($this->options->type), ['tripal', 'chado'])) {
+            throw new Exception('Please specify a valid field type. You may choose between chado or tripal. For example, makefield --type=chado.');
+        }
+    }
+
+    /**
      * Prints introduction message.
      */
     protected function printIntro()
@@ -165,10 +178,7 @@ class Generator
      */
     protected function generate()
     {
-        $fields_stub = file_get_contents(__DIR__.' /../stubs/fields');
-        $class_stub = file_get_contents(__DIR__.' /../stubs/field_class');
-        $formatter_stub = file_get_contents(__DIR__.' /../stubs/field_formatter');
-        $widget_stub = file_get_contents(__DIR__.' /../stubs/field_widget');
+        list($fields_stub, $class_stub, $formatter_stub, $widget_stub) = $this->getFilesContent();
 
         // Find and replace variables in stubs.
         // The structure of variables are $$name_of_var$$ and they correspond
@@ -186,6 +196,23 @@ class Generator
             'formatter' => $formatter_stub,
             'widget' => $widget_stub,
         ];
+    }
+
+    /**
+     * Get the correct stub files according to the type option.
+     *
+     * @return array
+     */
+    protected function getFilesContent()
+    {
+        $type = $this->options->type ? strtolower($this->options->type) : 'tripal';
+
+        $fields_stub = file_get_contents(__DIR__."/../stubs/{$type}_fields");
+        $class_stub = file_get_contents(__DIR__."/../stubs/{$type}_field_class");
+        $formatter_stub = file_get_contents(__DIR__."/../stubs/{$type}_field_formatter");
+        $widget_stub = file_get_contents(__DIR__."/../stubs/{$type}_field_widget");
+
+        return [$fields_stub, $class_stub, $formatter_stub, $widget_stub];
     }
 
     /**
@@ -215,6 +242,11 @@ class Generator
         return $path;
     }
 
+    /**
+     * Get the path to output files after creating any missing folders.
+     *
+     * @return array
+     */
     protected function getFieldsDir()
     {
         if ($this->options->output) {
@@ -224,6 +256,12 @@ class Generator
         return $this->createFromWorkingDir();
     }
 
+    /**
+     * Create output directory structure starting from working directory.
+     *
+     * @return array
+     * @throws \Exception
+     */
     protected function createFromWorkingDir()
     {
         $current = getcwd();
@@ -243,6 +281,12 @@ class Generator
         ];
     }
 
+    /**
+     * Create output directory structure according to output option.
+     *
+     * @return array
+     * @throws \Exception
+     */
     protected function createFromOutputPath()
     {
         // Create the includes dir if does not exist

@@ -36,8 +36,11 @@ makfield [--output|-o=/full/path/to/module]
 # If installed manually without composer
 ./makefield [--output|-o=/full/path/to/module]
 ```
-- Options:
-  - --output (-o for short): Output path 
+**Options:**
+|Option|default|description|example|
+|------|-------|-----------|-------|
+|\--output (-o)|Current working directory|The path to the module|`makefield -o="/var/www/html/sites/all/modules/my_module"`|
+|\--type (-t)|`chado`|The type of field to generate. Choose between chado which would extend ChadoField or tripal to extend TripalField|`makefield -t=tripal`|
 
 ### Output
 Tripal Fields Generator will create four files that define your field.  For the custom controlled vocabulary (CV) term `example` defined in the `local` CV, the field is defined in three files:
