@@ -29,7 +29,7 @@ The final structure of your fields should look like the example below, with a gi
 module/
 ├── includes/
 │   ├── TripalFields/
-│   │    └── CV__CVterm/
+│   │    ├── CV__CVterm/
 │   │    │   ├── CV__CVterm.inc
 │   │    │   ├── CV__CVterm_formatter.inc
 │   │    │   └── CV__CVterm_widget.inc
