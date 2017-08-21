@@ -23,6 +23,9 @@ Additionally, a fields file stub describing the fields declared in your module i
 
 The final structure of your fields should have a given field `CV__CVTERM` in `module/includes/TripalFields/CV_CVterm`, with the `module.fields.inc` located in `module/includes/TripalFields`.
 
+#### Output file structure 
+By default, the field file be placed in `CV__CVterm_output`, and the classes defining your field will be in the field folder `CV__CVterm_output/CV__CVterm`.  You may specify a different output path using the output flag, `-o="/path/to/module"` or `--output="/path/to/module"`.  
+
 ### Terms
 The below terms must be provided for each field you generate.
 
