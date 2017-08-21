@@ -3,7 +3,19 @@ This is a CLI tool to help automate the generation of [Tripal fields](http://tri
 
 ## Documentation
 
-### Download
+### Installation
+
+### Composer
+```shell
+composer global require statonlab/feilds_generator
+```
+**Note:** make sure you export the composer bin directory by running the following command:
+```shell
+# Add this line to your .bashrc or .bash_profile to persist between shell sessions.
+export PATH="$PATH:~/.composer/vendor/bin"
+```
+
+### Manual
 You can download this tool using the "[Clone or download](https://github.com/statonlab/fields_generator/archive/master.zip)" button above or cloning the repository using Git.
 ```shell
 git clone https://github.com/statonlab/fields_generator.git
@@ -12,11 +24,14 @@ git clone https://github.com/statonlab/fields_generator.git
 ### Usage
 * Generate a new ChadoField by running the following command and answering a few questions.
 ```shell
-php generate.php [--output|-o=/full/path/to/module]
+# If installed globally with composer
+makfield [--output|-o=/full/path/to/module]
+
+# If installed manually without composer
+./makefield [--output|-o=/full/path/to/module]
 ```
 
 ### Output
-
 Tripal Fields Generator will create four files that define your field.  For the custom controlled vocabulary (CV) term `example` defined in the `local` CV, the field is defined in three files:
 * The Fields class, `local__example.inc`
 * The field formatter, `local__example_formatter.inc`
@@ -46,12 +61,12 @@ By default, the field file will be placed in `CV__CVterm_output`, and the classe
 ### Terms
 The below terms must be provided for each field you generate.
 
- * **Field Label**: A human readable label for the field. e,g. Germplasm Summary
- * **Field Description**:  A human readable description of the field
- *  **Module Name**:  The machine name of the module this field is distributed with.  e,g. tripal_germplasm_module
- *  **Controlled Vocabulary**: The machine name of the Chado controlled vocabulary containing your field term. e,g. go
- *  **Controlled Vocabulary Term**: The term name. e,g. germplasm_summary
- * **Accession**: The accession number for this term in the vocabulary, e,g. 30021.  This must match the dbxref value in Chado.
+ - **Field Label**: A human readable label for the field. e,g. Germplasm Summary
+ - **Field Description**:  A human readable description of the field
+ - **Module Name**:  The machine name of the module this field is distributed with.  e,g. tripal_germplasm_module
+ - **Controlled Vocabulary**: The machine name of the Chado controlled vocabulary containing your field term. e,g. go
+ - **Controlled Vocabulary Term**: The term name. e,g. germplasm_summary
+ - **Accession**: The accession number for this term in the vocabulary, e,g. 30021.  This must match the dbxref value in Chado.
 
 ## Contributing
 Contributions are highly welcomed and recommended.
