@@ -86,7 +86,7 @@ class Generator
     {
         $this->questions = [
             'Field Label (A human readable label for the field. e,g. Germplasm Summary): ' => 'field_label',
-            'Field Description  (A human readable description of the field)' => 'field_description',
+            'Field Description  (A human readable description of the field): ' => 'field_description',
             'Module Name (The machine name of the module this field is distributed with.  e,g. tripal_germplasm_module): ' => 'module_name',
             'Controlled Vocabulary (The machine name of the Chado controlled vocabulary containing your field term. e,g. go): ' => 'cv_name',
             'Controlled Vocabulary Term (e,g. germplasm_summary): ' => 'cv_term',

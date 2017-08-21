@@ -19,10 +19,19 @@ Tripal Fields Generator will create four files that define your field.  For the 
 * The field formatter, `local__example_formatter.inc`
 * The field widget, `local__example_widget.inc`
 
-Additionally, a fields file stub describing the fields declared in your module is generated: for this example module, the file might be  `tripal_example_module.fields.inc`.
+Additionally, a fields file stub describing the fields declared in your module is generated: for this example module, the file might be  `tripal_example_module.fields.inc`.  Note that *all* of the fields in your module are described here: running TFG multiple times will require you to combine this file for each field.
 
+The final structure of your fields should have a given field `CV__CVTERM` in `module/includes/TripalFields/CV_CVterm`, with the `module.fields.inc` located in `module/includes/TripalFields`.
 
-Once your fields are generated, 
+### Terms
+The below terms must be provided for each field you generate.
+
+ * **Field Label**: A human readable label for the field. e,g. Germplasm Summary
+ * **Field Description**:  (A human readable description of the field)
+ *  **Module Name**:  The machine name of the module this field is distributed with.  e,g. tripal_germplasm_module)
+   *  **Controlled Vocabulary** The machine name of the Chado controlled vocabulary containing your field term. e,g. go)
+ *  **Controlled Vocabulary Term** e,g. germplasm_summary
+ * **Accession**: The accession number for this term in the vocabulary, e,g. 30021.  This must match the dbxref value in Chado.
 
 ## Contributing
 Contributions are highly welcomed and recommended.
