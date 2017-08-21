@@ -14,17 +14,35 @@ git clone https://github.com/statonlab/fields_generator.git
 ```shell
 php generate.php
 ```
-Tripal Fields Generator will create four files that define your field.  For the custom controlled vocabulary (CV) term `example` defined in the `local` CV, the field is defined in four files:
+
+### Output
+
+Tripal Fields Generator will create four files that define your field.  For the custom controlled vocabulary (CV) term `example` defined in the `local` CV, the field is defined in three files:
 * The Fields class, `local__example.inc`
 * The field formatter, `local__example_formatter.inc`
 * The field widget, `local__example_widget.inc`
 
 Additionally, a fields file stub describing the fields declared in your module is generated: for this example module, the file might be  `tripal_example_module.fields.inc`.  Note that *all* of the fields in your module are described here: running TFG multiple times will require you to combine this file for each field.
+The final structure of your fields should look like the example below, with a given field `CV__CVTERM` in `module/includes/TripalFields/CV_CVterm`, and the `module.fields.inc` located in `module/includes/TripalFields`.
 
-The final structure of your fields should have a given field `CV__CVTERM` in `module/includes/TripalFields/CV_CVterm`, with the `module.fields.inc` located in `module/includes/TripalFields`.
+```
+     module/
+      ├── includes/
+      │   ├── TripalFields/
+      │   │    └── CV__CVterm/
+      │   │    │   ├── CV__CVterm.inc
+      │   │    │   ├── CV__CVterm_formatter.inc
+      │   │    │   └── CV__CVterm_widget.inc
+      │   └── module.fields.inc
+      │   
+      ├── rest of my module...
+
+```
 
 #### Output file structure 
+
 By default, the field file be placed in `CV__CVterm_output`, and the classes defining your field will be in the field folder `CV__CVterm_output/CV__CVterm`.  You may specify a different output path using the output flag, `-o="/path/to/module"` or `--output="/path/to/module"`.  
+
 
 ### Terms
 The below terms must be provided for each field you generate.
