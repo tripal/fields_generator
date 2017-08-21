@@ -41,7 +41,7 @@ The final structure of your fields should look like the example below, with a gi
 
 #### Output file structure 
 
-By default, the field file be placed in `CV__CVterm_output`, and the classes defining your field will be in the field folder `CV__CVterm_output/CV__CVterm`.  You may specify a different output path using the output flag, `-o="/path/to/module"` or `--output="/path/to/module"`.  
+By default, the field file will be placed in `CV__CVterm_output`, and the classes defining your field will be in the field folder `CV__CVterm_output/CV__CVterm`.  You may specify a different output path using the output flag, `-o="/path/to/module"` or `--output="/path/to/module"`.  
 
 
 ### Terms
