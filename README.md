@@ -12,7 +12,7 @@ git clone https://github.com/statonlab/fields_generator.git
 ### Usage
 * Generate a new ChadoField by running the following command and answering a few questions.
 ```shell
-php generate.php [-o --output]
+php generate.php [--output|-o=/full/path/to/module]
 ```
 
 ### Output
