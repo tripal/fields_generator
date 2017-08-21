@@ -48,9 +48,9 @@ By default, the field file will be placed in `CV__CVterm_output`, and the classe
 The below terms must be provided for each field you generate.
 
  * **Field Label**: A human readable label for the field. e,g. Germplasm Summary
- * **Field Description**:  (A human readable description of the field)
- *  **Module Name**:  The machine name of the module this field is distributed with.  e,g. tripal_germplasm_module)
-   *  **Controlled Vocabulary** The machine name of the Chado controlled vocabulary containing your field term. e,g. go)
+ * **Field Description**:  A human readable description of the field
+ *  **Module Name**:  The machine name of the module this field is distributed with.  e,g. tripal_germplasm_module
+   *  **Controlled Vocabulary** The machine name of the Chado controlled vocabulary containing your field term. e,g. go
  *  **Controlled Vocabulary Term** e,g. germplasm_summary
  * **Accession**: The accession number for this term in the vocabulary, e,g. 30021.  This must match the dbxref value in Chado.
 
