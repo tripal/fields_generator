@@ -31,7 +31,7 @@ makfield [--output|-o=/full/path/to/module]
 ./makefield [--output|-o=/full/path/to/module]
 ```
 - Options:
- 1. --output (-o for short): Specifying the output path 
+  - --output (-o for short): Output path 
 
 ### Output
 Tripal Fields Generator will create four files that define your field.  For the custom controlled vocabulary (CV) term `example` defined in the `local` CV, the field is defined in three files:
