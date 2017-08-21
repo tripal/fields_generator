@@ -6,9 +6,15 @@ This is a CLI tool to help automate the generation of [Tripal fields](http://tri
 ### Installation
 
 #### Composer
+**Install command**
 ```shell
 composer global require statonlab/feilds_generator
 ```
+**Update command**
+```shell
+composer global update
+```
+
 **Note:** make sure you export the composer bin directory by running the following command:
 ```shell
 # Add this line to your .bashrc or .bash_profile to persist between shell sessions.
