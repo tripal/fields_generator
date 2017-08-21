@@ -22,7 +22,7 @@ git clone https://github.com/statonlab/fields_generator.git
 ```
 
 ### Usage
-* Generate a new ChadoField by running the following command and answering a few questions.
+- Generate a new ChadoField by running the following command and answering a few questions.
 ```shell
 # If installed globally with composer
 makfield [--output|-o=/full/path/to/module]
@@ -30,6 +30,8 @@ makfield [--output|-o=/full/path/to/module]
 # If installed manually without composer
 ./makefield [--output|-o=/full/path/to/module]
 ```
+- Options:
+ 1. --output (-o for short): Specifying the output path 
 
 ### Output
 Tripal Fields Generator will create four files that define your field.  For the custom controlled vocabulary (CV) term `example` defined in the `local` CV, the field is defined in three files:
@@ -38,8 +40,7 @@ Tripal Fields Generator will create four files that define your field.  For the 
 * The field widget, `local__example_widget.inc`
 
 Additionally, a fields file stub describing the fields declared in your module is generated: for this example module, the file might be  `tripal_example_module.fields.inc`.  Note that *all* of the fields in your module are described here: running TFG multiple times will require you to combine this file for each field.
-The final structure of your fields should look like the example below, with a given field `CV__CVTERM` in `module/includes/TripalFields/CV_CVterm`, and the `module.fields.inc` located in `module/includes/TripalFields`.
-
+The final structure of your fields should look like the example below, with a given field `CV__CVTERM` in `module/includes/TripalFields/CV_CVterm`, and the `module.fields.inc` located in `module/includes`. For a full example of a field please visit the [Tripal Example Module repository](https://github.com/tripal/tripal_example).
 ```
 module/
 ├── includes/
@@ -49,7 +50,6 @@ module/
 │   │       ├── CV__CVterm_formatter.inc
 │   │       └── CV__CVterm_widget.inc
 │   └── module.fields.inc
-│   
 └── rest of my module...
 ```
 
