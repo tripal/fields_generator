@@ -1,6 +1,6 @@
 <?php
 
-namespace FieldGenerator\Src;
+namespace StatonLab\FieldGenerator;
 
 class Colors
 {

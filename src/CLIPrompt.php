@@ -1,6 +1,6 @@
 <?php
 
-namespace FieldGenerator\Src;
+namespace StatonLab\FieldGenerator;
 
 /**
  * Class CLIPrompt.
@@ -13,14 +13,14 @@ class CLIPrompt
     /**
      * Input File Resource.
      *
-     * @var bool|resource
+     * @var Resource
      */
     protected $input;
 
     /**
      * Holds the prompt colors generator.
      *
-     * @var \FieldGenerator\Src\Colors
+     * @var \StatonLab\FieldGenerator\Colors
      */
     protected $colored;
 

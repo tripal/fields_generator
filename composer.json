@@ -1,0 +1,24 @@
+{
+    "name": "statonlab/fields_generator",
+    "homepage": "https://github.com/statonlab/fields_generator",
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Abdullah Almsaeed",
+            "email": "aalmsaee@utk.edu"
+        },
+        {
+            "name": "Bradford Condon",
+            "email": "bcondon@utk.edu"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "StatonLab\\FieldGenerator\\": "src/"
+        }
+    },
+    "bin" : [
+        "makefield"
+    ]
+}
