@@ -83,6 +83,7 @@ class Generator
      */
     protected $mapped_options = [
         'type:' => 't:',
+        'output:' => 'o:',
     ];
 
     /**
@@ -174,33 +175,79 @@ class Generator
      * Make each field file.
      *
      * @param $files
-     * @return bool
+     * @return array
      */
     protected function make($files)
     {
-        // Make output directory
-        $current = getcwd();
-        $path = "{$current}/{$this->field_name}_output";
-
-        if (! mkdir($path)) {
-            throw new Exception('Could not create directory '.$path.'. Please check path permissions or remove directory if it exists.');
-        }
+        $path = $this->getFieldsDir();
 
         // Field settings
-        file_put_contents("$path/{$this->module_name}.fields.inc", $files['fields']);
-
-        // Create the field dir
-        $field_path = "{$path}/{$this->field_name}";
-        if (! mkdir($field_path)) {
-            throw new Exception('Could not create directory '.$field_path.'. Please check path permissions or remove the directory if it exists.');
-        }
+        file_put_contents("{$path['includes']}/{$this->module_name}.fields.inc", $files['fields']);
 
         // Create the class files
-        file_put_contents("$field_path/{$this->field_name}.inc", $files['class']);
-        file_put_contents("$field_path/{$this->field_name}_widget.inc", $files['widget']);
-        file_put_contents("$field_path/{$this->field_name}_formatter.inc", $files['formatter']);
+        file_put_contents("{$path['field']}/{$this->field_name}.inc", $files['class']);
+        file_put_contents("{$path['field']}/{$this->field_name}_widget.inc", $files['widget']);
+        file_put_contents("{$path['field']}/{$this->field_name}_formatter.inc", $files['formatter']);
 
         return $path;
+    }
+
+    protected function getFieldsDir()
+    {
+        if ($this->options->output) {
+            return $this->createFromOutputPath();
+        }
+
+        return $this->createFromWorkingDir();
+    }
+
+    protected function createFromWorkingDir()
+    {
+        $current = getcwd();
+        $includes = "{$current}/{$this->field_name}_output";
+        if (! mkdir($includes)) {
+            throw new Exception("Could not create directory $includes Please check path permissions or remove the directory if it exists.");
+        }
+
+        $path = "$includes/{$this->field_name}";
+        if (! mkdir($path)) {
+            throw new Exception("Could not create directory $path Please check path permissions or remove the directory if it exists.");
+        }
+
+        return [
+            'includes' => $includes,
+            'field' => $path,
+        ];
+    }
+
+    protected function createFromOutputPath()
+    {
+        // Create the includes dir if does not exist
+        $includes = "{$this->options->output}/includes";
+        if (! file_exists($includes)) {
+            if (! mkdir($includes)) {
+                throw new Exception("Could not create directory $includes Please check path permissions.");
+            }
+        }
+
+        // Create the TripalFields dir if does not exist
+        $path = "$includes/TripalFields";
+        if (! file_exists($path)) {
+            if (! mkdir($path)) {
+                throw new Exception("Could not create directory $path Please check path permissions.");
+            }
+        }
+
+        // Create the field dir
+        $path .= "/{$this->field_name}";
+        if (! mkdir($path)) {
+            throw new Exception("Could not create directory $path Please check path permissions.");
+        }
+
+        return [
+            'includes' => $includes,
+            'field' => $path,
+        ];
     }
 
     /**

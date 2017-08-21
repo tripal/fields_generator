@@ -18,4 +18,4 @@ try {
 }
 
 $prompt->success('Field generated successfully.');
-$prompt->success("The field can be found at $path");
+$prompt->success("The field can be found at {$path['field']}");
