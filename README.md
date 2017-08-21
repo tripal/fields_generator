@@ -5,7 +5,7 @@ This is a CLI tool to help automate the generation of [Tripal fields](http://tri
 
 ### Installation
 
-### Composer
+#### Composer
 ```shell
 composer global require statonlab/feilds_generator
 ```
@@ -15,7 +15,7 @@ composer global require statonlab/feilds_generator
 export PATH="$PATH:~/.composer/vendor/bin"
 ```
 
-### Manual
+#### Manual
 You can download this tool using the "[Clone or download](https://github.com/statonlab/fields_generator/archive/master.zip)" button above or cloning the repository using Git.
 ```shell
 git clone https://github.com/statonlab/fields_generator.git
