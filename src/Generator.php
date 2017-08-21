@@ -85,14 +85,13 @@ class Generator
     public function __construct()
     {
         $this->questions = [
-            'Field Label (E,g. Germplasm Summary): ' => 'field_label',
-            'Field Description: ' => 'field_description',
-            'Module Name (E,g. tripal_germplasm_module): ' => 'module_name',
-            'Controlled Vocabulary Name (E,g. local): ' => 'cv_name',
-            'Controlled Vocabulary Term (E,g. germplasm_summary): ' => 'cv_term',
-            'Accession (E,g. 30021 or germplasm): ' => 'field_accession',
+            'Field Label (A human readable label for the field. e,g. Germplasm Summary): ' => 'field_label',
+            'Field Description  (A human readable description of the field)' => 'field_description',
+            'Module Name (The machine name of the module this field is distributed with.  e,g. tripal_germplasm_module): ' => 'module_name',
+            'Controlled Vocabulary (The machine name of the Chado controlled vocabulary containing your field term. e,g. go): ' => 'cv_name',
+            'Controlled Vocabulary Term (e,g. germplasm_summary): ' => 'cv_term',
+            'Accession (The accession number for this term in the vocabulary, e,g. 30021.  This must match the dbxref value in Chado.): ' => 'field_accession',
         ];
-
         $this->prompt = new CLIPrompt();
     }
 
@@ -103,7 +102,18 @@ class Generator
      */
     public function run()
     {
-        $this->prompt->line('Please fill the following form to generate a Tripal Field.');
+        $this->prompt->line('
+        This helper will automate field assembly based on the controlled vocabulary (CV) and controlled vocabulary term (CVterm).
+        Ideally, every field should map to a controlled vocabulary (ontology) term.  If no term exists from a fitting CV, you can use the CV "local".
+        Additional help is available in the README, and at http://tripal.info/tutorials/v3.x/developers_handbook.
+       
+       
+        ***************************
+        ***************************
+        
+        
+        Please fill the following form to generate a Tripal Field.
+        ');
 
         foreach ($this->questions as $question => $field) {
             $this->{$field} = $this->prompt->ask($question);
