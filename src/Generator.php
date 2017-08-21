@@ -77,6 +77,22 @@ class Generator
     protected $prompt;
 
     /**
+     * CLI Options.
+     *
+     * @var array
+     */
+    protected $mapped_options = [
+        'type:' => 't:',
+    ];
+
+    /**
+     * CLI Options Parser.
+     *
+     * @var \FieldGenerator\Src\OptionsParser
+     */
+    protected $options;
+
+    /**
      * Generator constructor.
      * Set all questions here.
      *
@@ -94,6 +110,7 @@ class Generator
         ];
 
         $this->prompt = new CLIPrompt();
+        $this->options = new OptionsParser($this->mapped_options);
     }
 
     /**
