@@ -4,8 +4,18 @@ namespace FieldGenerator\Src;
 
 class Colors
 {
+    /**
+     * Holds a list of foreground colors.
+     *
+     * @var array
+     */
     protected $foreground_colors = [];
 
+    /**
+     * Holds a list of background colors.
+     *
+     * @var array
+     */
     protected $background_colors = [];
 
     /**
