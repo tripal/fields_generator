@@ -1,6 +1,6 @@
 <?php
 
-namespace FieldGenerator\Src;
+namespace StatonLab\FieldGenerator;
 
 use Exception;
 
@@ -72,7 +72,7 @@ class Generator
     /**
      * Holds the prompt output/input handler.
      *
-     * @var \FieldGenerator\Src\CLIPrompt
+     * @var \StatonLab\FieldGenerator\CLIPrompt
      */
     protected $prompt;
 
@@ -91,7 +91,7 @@ class Generator
     /**
      * CLI Options Parser.
      *
-     * @var \FieldGenerator\Src\OptionsParser
+     * @var \StatonLab\FieldGenerator\OptionsParser
      */
     protected $options;
 
@@ -276,7 +276,7 @@ class Generator
     /**
      * Give public access to the prompt.
      *
-     * @return \FieldGenerator\Src\CLIPrompt
+     * @return \StatonLab\FieldGenerator\CLIPrompt
      */
     public function prompt()
     {
