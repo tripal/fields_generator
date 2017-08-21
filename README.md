@@ -26,17 +26,16 @@ Additionally, a fields file stub describing the fields declared in your module i
 The final structure of your fields should look like the example below, with a given field `CV__CVTERM` in `module/includes/TripalFields/CV_CVterm`, and the `module.fields.inc` located in `module/includes/TripalFields`.
 
 ```
-     module/
-      ├── includes/
-      │   ├── TripalFields/
-      │   │    └── CV__CVterm/
-      │   │    │   ├── CV__CVterm.inc
-      │   │    │   ├── CV__CVterm_formatter.inc
-      │   │    │   └── CV__CVterm_widget.inc
-      │   └── module.fields.inc
-      │   
-      ├── rest of my module...
-
+module/
+├── includes/
+│   ├── TripalFields/
+│   │    └── CV__CVterm/
+│   │    │   ├── CV__CVterm.inc
+│   │    │   ├── CV__CVterm_formatter.inc
+│   │    │   └── CV__CVterm_widget.inc
+│   └── module.fields.inc
+│   
+└── rest of my module...
 ```
 
 #### Output file structure 
