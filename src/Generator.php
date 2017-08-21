@@ -77,7 +77,9 @@ class Generator
     protected $prompt;
 
     /**
-     * CLI Options.
+     * CLI Options mapped long form => shorthand form.
+     * Read http://php.net/manual/en/function.getopt.php for more
+     * information about the optional vs required options.
      *
      * @var array
      */
