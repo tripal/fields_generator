@@ -165,10 +165,10 @@ class Generator
      */
     protected function generate()
     {
-        $fields_stub = file_get_contents(__DIR__.' /../stubs / fields');
-        $class_stub = file_get_contents(__DIR__.' /../stubs / field_class');
-        $formatter_stub = file_get_contents(__DIR__.' /../stubs / field_formatter');
-        $widget_stub = file_get_contents(__DIR__.' /../stubs / field_widget');
+        $fields_stub = file_get_contents(__DIR__.' /../stubs/fields');
+        $class_stub = file_get_contents(__DIR__.' /../stubs/field_class');
+        $formatter_stub = file_get_contents(__DIR__.' /../stubs/field_formatter');
+        $widget_stub = file_get_contents(__DIR__.' /../stubs/field_widget');
 
         // Find and replace variables in stubs.
         // The structure of variables are $$name_of_var$$ and they correspond
