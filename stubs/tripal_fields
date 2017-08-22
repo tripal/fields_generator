@@ -40,7 +40,7 @@ function $$module_name$$_bundle_fields_info($entity_type, $bundle) {
   if (isset($bundle->data_table) AND ($bundle->data_table == 'organism')) {
     // First add my term.
     tripal_insert_cvterm(array(
-      'id' => '$$cv_name$$:$$cv_term$$',
+      'id' => '$$cv_name$$:$$field_accession$$',
       'name' => '$$cv_term$$',
       'cv_name' => '$$cv_name$$',
       'definition' => '$$field_description$$',
