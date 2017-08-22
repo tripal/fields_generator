@@ -229,7 +229,7 @@ class Generator
         $fields_name = $this->module_name;
         if ($this->options->output) {
             if (file_exists("{$path['includes']}/{$fields_name}.fields.inc")) {
-                $fields_name .= 'stub';
+                $fields_name .= '.stub';
             }
         }
         file_put_contents("{$path['includes']}/{$fields_name}.fields.inc", $files['fields']);

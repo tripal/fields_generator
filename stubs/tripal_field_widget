@@ -13,7 +13,7 @@ class $$field_name$$_widget extends TripalFieldWidget {
   public static $default_label = '$$field_label$$';
 
   // The list of field types for which this formatter is appropriate.
-  public static $field_types = array('$$field_name$$_widget');
+  public static $field_types = array('$$field_name$$');
 
   /**
    * Provides the form for editing of this field.

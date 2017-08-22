@@ -113,6 +113,12 @@ class $$field_name$$ extends TripalField {
    *
    */
   public function load($entity) {
+  	  // Tripal fields, by default, won't show up on the page unless there
+      // is a value attached to them. Therefore, this line adds a default
+      // value for testing purposes. Change this line to load the data
+      // your field requires.
+      $field_name = get_class();
+      $entity->{$field_name}['und'][0]['value'] = TRUE;
   }
 
 }
