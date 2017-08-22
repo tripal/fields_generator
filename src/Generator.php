@@ -205,7 +205,7 @@ class Generator
      */
     protected function getFilesContent()
     {
-        $type = $this->options->type ? strtolower($this->options->type) : 'tripal';
+        $type = $this->options->type ? strtolower($this->options->type) : 'chado';
 
         $fields_stub = file_get_contents(__DIR__."/../stubs/{$type}_fields");
         $class_stub = file_get_contents(__DIR__."/../stubs/{$type}_field_class");
