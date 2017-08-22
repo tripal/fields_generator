@@ -112,7 +112,7 @@ function $$module_name$$_bundle_instances_info($entity_type, $bundle) {
       ),
       'display' => array(
         'default' => array(
-          'label' => '',
+          'label' => 'hidden',
           'type' => '$$field_name$$_formatter',
           'settings' => array(),
         ),
