@@ -42,11 +42,23 @@ class Generator
     protected $cv_term;
 
     /**
-     * Controlled vocabulary such as SIO.
+     * Controlled vocabulary name in the chado.CV table.
+     * case EDAM:  EDAM.
+     * case general multilevel: subontology.
+     * Case SO: sequence
      *
      * @var
      */
     protected $cv_name;
+
+    /**
+     * Controlled vocabulary name in the chado.DB table.
+     * edge case EDAM: this is the subontology.
+     * case SO: this should be SO.
+     *
+     * @var
+     */
+    protected $db_name;
 
     /**
      * Accession for the cv term such as 873210 or germplasm_summary.
@@ -105,11 +117,12 @@ class Generator
     {
         $this->questions = [
             'Field Label (A human readable label for the field. e,g. Germplasm Summary): ' => 'field_label',
-            'Field Description  (A human readable description of the field): ' => 'field_description',
-            'Module Name (The machine name of the module this field is distributed with.  e,g. tripal_germplasm_module): ' => 'module_name',
-            'Controlled Vocabulary (The machine name of the Chado controlled vocabulary containing your field term. e,g. go): ' => 'cv_name',
+            'Field Description (A human readable description of the field): ' => 'field_description',
+            'Module Name (The machine name of the module this field is distributed with. e,g. tripal_germplasm_module): ' => 'module_name',
+            'Database name. For simple ontologies, this will be the CV name. When tripal inserts your term, it will be in the form "database_name:accession". ' => 'db_name',
+            'Controlled Vocabulary. For simple ontologies, the same as the DB name:  ' => 'cv_name',
             'Controlled Vocabulary Term (e,g. germplasm_summary): ' => 'cv_term',
-            'Accession (The accession number for this term in the vocabulary, e,g. 30021.  This must match the dbxref value in Chado.): ' => 'field_accession',
+            'Accession (The accession number for this term in the vocabulary, e,g. 30021. Accessions are integers for biological CVs, strings for semantic): ' => 'field_accession',
         ];
         $this->prompt = new CLIPrompt();
         $this->options = new OptionsParser($this->mapped_options);
@@ -130,7 +143,9 @@ class Generator
         }
 
         // Auto construct field name
-        $this->field_name = "{$this->cv_name}__{$this->cv_term}";
+        $lower = strtolower($this->db_name);
+
+        $this->field_name = "{$lower}__{$this->cv_term}";
         $this->questions[$this->field_name] = 'field_name';
 
         $files = $this->generate();
@@ -162,6 +177,7 @@ class Generator
         $this->prompt->line('This helper will automate field assembly based on the controlled vocabulary (CV) and controlled vocabulary term (CVterm).');
         $this->prompt->line('Ideally, every field should map to a controlled vocabulary (ontology) term.  If no term exists from a fitting CV, you can use the CV "local".');
         $this->prompt->line('Additional help is available in the README, and at http://tripal.info/tutorials/v3.x/developers_handbook.');
+        $this->prompt->line('In particular, check the documentation for how each CV is mapped in the CV and DB table.  Future versions of this tool will handle this automatically.');
         $this->prompt->line('');
         $this->prompt->line('***************************');
         $this->prompt->line('***************************');
