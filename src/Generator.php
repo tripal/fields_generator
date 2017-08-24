@@ -122,7 +122,7 @@ class Generator
             'Database name. For simple ontologies, this will be the CV name.  When tripal inserts your term, it will be in the form [Database name]:Accession. ' => 'db_name',
             'Controlled Vocabulary. For simple ontologies, the same as the DB name.  ' => 'cv_name',
             'Controlled Vocabulary Term (e,g. germplasm_summary): ' => 'cv_term',
-            'Accession (The accession number for this term in the vocabulary, e,g. 30021 (Accessions are integers for biological CVs, strings for semantic.): ' => 'field_accession',
+            'Accession (The accession number for this term in the vocabulary, e,g. 30021. Accessions are integers for biological CVs, strings for semantic.): ' => 'field_accession',
         ];
         $this->prompt = new CLIPrompt();
         $this->options = new OptionsParser($this->mapped_options);
