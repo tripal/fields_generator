@@ -95,7 +95,8 @@ The final structure of your fields should look like the example below, with a gi
 
 #### Output file structure 
 
-By default, the module-level field file (`moduleName.fields.inc`) will be placed in `CV__CVterm_output`, and the classes defining your field will be in the field folder `CV__CVterm_output/CV__CVterm`.  
+By default, the module-level field file (`moduleName.fields.inc`) will be placed in `CV__CVterm_output`, and the classes defining your field will be in the field folder `CV__CVterm_output/CV__CVterm`.  Note that the value of `CV` corresponds to what you enter for the *DB*, not the *CV* table!
+
 ```
 CV__CVterm_output/
 ├── CV__CVterm/
