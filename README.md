@@ -59,7 +59,7 @@ The generator will ask you for both the DB name and the CV name: these names cor
 | Information Artifact Ontology                  | IAO       | IAO                |
 | local                                          | local     | local              |
 | Ontology for Biomedical Investigation          | OBI       | OBI                |
-| Ontology for genetic interval                  | ogi       | OGI                |
+| Ontology for genetic interval                  | OGI       | ogi                |
 | Ontology of Biological and Clinical Statistics | OBCS      | OBCS               |
 | Relationship ontology (legacy)                 | RO        | ro                 |
 | Resource Description Framework Schema          | rdfs      | rdfs               |
