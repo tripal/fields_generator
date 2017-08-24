@@ -117,10 +117,10 @@ class Generator
     {
         $this->questions = [
             'Field Label (A human readable label for the field. e,g. Germplasm Summary): ' => 'field_label',
-            'Field Description  (A human readable description of the field): ' => 'field_description',
-            'Module Name (The machine name of the module this field is distributed with.  e,g. tripal_germplasm_module): ' => 'module_name',
-            'Database name.  For simple ontologies, this will be the CV name.  When tripal inserts your term, it will be in the form [Database name]:Accession. ' => 'db_name',
-            'Controlled Vocabulary.  For simple ontologies, the same as the DB name.  ' => 'cv_name',
+            'Field Description (A human readable description of the field): ' => 'field_description',
+            'Module Name (The machine name of the module this field is distributed with. e,g. tripal_germplasm_module): ' => 'module_name',
+            'Database name. For simple ontologies, this will be the CV name.  When tripal inserts your term, it will be in the form [Database name]:Accession. ' => 'db_name',
+            'Controlled Vocabulary. For simple ontologies, the same as the DB name.  ' => 'cv_name',
             'Controlled Vocabulary Term (e,g. germplasm_summary): ' => 'cv_term',
             'Accession (The accession number for this term in the vocabulary, e,g. 30021 (Accessions are integers for biological CVs, strings for semantic.): ' => 'field_accession',
         ];
