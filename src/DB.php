@@ -28,6 +28,7 @@ class DB {
 
   /**
    * P
+   *
    * @var array
    */
   protected $parameters;
@@ -134,11 +135,20 @@ class DB {
   public function get() {
     $execute = $this->prepared->execute($this->parameters);
 
-    if(!$execute) {
+    if (!$execute) {
       $error = $this->prepared->errorInfo();
-      throw new Exception("Couldn't execute query. $this->sql. " . $error[2]);
+      throw new Exception("Couldn't execute query. $this->sql. " . PHP_EOL . implode(' ', $error));
     }
 
     return $this->prepared->fetchAll();
+  }
+
+  /**
+   * Get the count directly.
+   *
+   * @return mixed
+   */
+  public function count() {
+    return intval($this->get()[0]['count']);
   }
 }
