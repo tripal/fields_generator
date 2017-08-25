@@ -112,7 +112,7 @@ EDAM builds its term accessions using the subontology instead of the ontology.  
 
 ```   
 $term= tripal_insert_cvterm([
-// Vocabulary here refers to the db entry.  See how its the subontology now!
+// Vocabulary here refers to the CV entry. 
             'id' => 'data:2044',
             'name' => 'sequence',
             'cv_name' => 'EDAM',
@@ -121,11 +121,11 @@ $term= tripal_insert_cvterm([
 
 ```
 
-For the field, the the `term_vocabulary` is the **subvocabulary data, not the vocabulary EDAM**.
+For the field, the the `term_vocabulary` is the **subvocabulary** data, which is the DB table value.
 
 ```
  public static $default_instance_settings = [
-        // The short name for the vocabulary (e.g. schema, SO, GO, PATO, etc.).
+// Vocabulary here refers to the db entry.  
         'term_vocabulary' => 'data',
         // The name of the term.
         'term_name' => 'sequence',
