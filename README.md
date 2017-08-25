@@ -41,7 +41,9 @@ makefield [--output|-o=/full/path/to/module]
 ./makefield [--output|-o=/full/path/to/module]
 ```
 
-The generator will ask you for both the DB name and the CV name: these names correspond to the chado.db and chado.cv tables.  If you arent sure what these values are, the below table will provide them.
+The generator will ask you for both the DB name and the CV name: these names correspond to the chado.db and chado.cv tables.  If you aren't sure what these values are, you can use the [EBI Ontology lookup Service](http://www.ebi.ac.uk/ols/) CVterm entry as a guide: the DB name is the value in the *orange* box, and the CV name is the value in the *teal* box. For a full explanation, please read [the CV guide](CV_guide.md). 
+
+Alternatively, the below table shows the DB and CV values for commonly used ontologies in Tripal 3.
 
 | FULL NAME                                      | DB        | CV                 |
 |------------------------------------------------|-----------|--------------------|
