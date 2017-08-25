@@ -2,34 +2,6 @@
 
 # GUIDE TO ACCESSIONS AND CVS
 
-| FULL NAME                                      | DB        | CV                 | insert_cv id   | insert_cv cv_name | field naming convention (following tripal_chado) | default instance term vocabulary | note |
-|------------------------------------------------|-----------|--------------------|----------------|-------------------|--------------------------------------------------|----------------------------------|------|
-| EDAM data                                      | data      | EDAM               | data:0001      | EDAM              | data__cvterm                                     | data                             |      |
-| DCMI metadata terms                            | dc        | dc                 | dc:STRING      | dc                |                                                  |                                  |      |
-| Eagle-I Research Ontology                      | ERO       | ero                | ERO:0000001    | ero               |                                                  |                                  |      |
-| Friend of a Friend                             | foaf      | foaf               | foaf:STRING    |                   |                                                  |                                  |      |
-| EDAM format                                    | format    | EDAM               | format:0001    | EDAM              | format__cvterm                                   | format                           |      |
-| Gene ontology biological process               | GO        | biological_process | GO:000001      | ?                 | go__cvterm                                       |                                  |      |
-| Gene ontology cellular component               | GO        | cellular_component | GO:000001      | ?                 | go__cvterm                                       | GO                               |      |
-| Gene ontology molecular function               | GO        | molecular_function | GO:000001      | ?                 | go__cvterm                                       |                                  |      |
-| hydra                                          | hydra     | hydra              | hydra:STRING   |                   |                                                  |                                  |      |
-| Information Artifact Ontology                  | IAO       | IAO                | IAO:000001     | IAO               |                                                  |                                  |      |
-| local                                          | local     | local              | local:STRING   | local             | local__cvterm                                    | local                            |      |
-| Ontology of Biological and Clinical Statistics | OBCS      | OBCS               | OBCS:000001    | OBCS              |                                                  |                                  |      |
-| Ontology for Biomedical Investigation          | OBI       | OBI                |                |                   | obi__cvterm                                      | OBI                              |      |
-| Ontology for genetic interval                  | ogi       | OGI                | OGI:0000001    | ogi  (MISTAKE? check code)             | ogi__cvterm                                      |                                  |      |
-| EDAM operation                                 | operation | EDAM               | operation:0001 | EDAM              | operation__cvterm                                | operation                        |      |
-| Resource Description Framework Schema          | rdfs      | rdfs               | rdfs:STRING    |                   |                                                  |                                  |      |
-| Relationship ontology (legacy)                 | RO        | ro                 |                |                   |                                                  |                                  |      |
-| Systems Biology                                | SBO       | sbo                | SBO:000001     | sbo               |                                                  |                                  |      |
-| schema                                         | schema    | schema             | schema:STRING  |                   |                                                  |                                  |      |
-| Semanticscience Integrated Ontology            | SIO       | SIO                | SIO:000001     | SIO               | sio__cvterm                                      | SIO                              |      |
-| Sequence ontology                              | SO        | sequence           | SO:0000001     | sequence          | so__cvterm                                       | SO                               |      |
-| Software Ontology                              | SWO       | swo                | SWO:0000001    | swo               |                                                  |                                  |      |
-| Taxonomic Rank                                 | TAXRANK   | taxonomic_rank     |                |                   |                                                  |                                  |      |
-| EDAM topic                                     | topic     | EDAM               | topic:0001     | EDAM              | topic__cvterm                                    | topic                            |      |
-
-
 ## Ontologies: what and why?
 Tripal 3 requires all bundles and fields to be associated with a Controlled Vocabulary (CV).  CVs are dictionaries of defined terms (CVterms) that make data machine-accessible, ensuring uniform terms are used across experiments, organisms and websites.  Without CVterms, our scientific knowledge might be split by "dialects".  Plant biologists might study temperature stress, while animal biologists study heat shock.  Each group might benefit from the knowledge of the other, but they use a different vocabulary to describe the same thing, so they never discover eachother's findings.  CVterms make this easier not just for people, but especially for machines.
 
