@@ -47,8 +47,10 @@ class CLIPrompt {
       $question = $this->applyStyle($question, $style);
     }
 
-    while (empty($response = readline($question))) {
+   echo $question;
+    while (empty($response = readline())) {
       $this->error('Please provide a response');
+      echo $question;
     }
 
     return $response;

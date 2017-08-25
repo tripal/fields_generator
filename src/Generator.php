@@ -217,7 +217,7 @@ class Generator {
     }
 
     if (!$failed) {
-      $results = $this->db->query('SELECT CV.name AS cv_name, DB.name AS db_name, DBXREF.accession AS accession
+      $results = $this->db->query('SELECT CV.name AS cv_name, DB.name AS db_name, DBX.accession AS accession
                         FROM chado.cvterm AS CVTERM
                         JOIN  chado.cv AS CV ON CVTERM.cv_id  = CV.cv_id
                         JOIN  chado.dbxref AS DBX ON CVTERM.dbxref_id = DBX.dbxref_id
