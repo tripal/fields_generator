@@ -9,8 +9,6 @@ Ontologies take this a step further.  Where CVs were controlled lists of CVterms
 
 Tripal leverages this system to make way for the future of the symantic web.  Because every bundle and field you define in Tripal will be associated with a CVterm, it's important to use the [EMBL-EBI Ontology Lookup Service](http://www.ebi.ac.uk/ols/index) and to think carefully about the terms you use to describe your objects.  It's also important to understand how Chado and Tripal utilize these CVs and to be aware of some of the trickier cases.
 
-We care about this so much that you should track when you implement CVterms, and when you convert old local terms to ontology terms, it in [this google sheet](https://docs.google.com/spreadsheets/d/1jTxddMd69S5qOGclsSecWKwO2vLvMOsOLwh4ciOSK-U/edit?usp=sharing)!
-
 CVs are defined in two tables in chado: DB and CV.  As you'll see below, in the simplest example, DB will be the same as CV. The terms themselves exist in CVterm.  The CVterm table has a foreign key to CV (CV\_id) and a foreign key to DB (dbxref\_id): this is how DB and CV are indirectly linked.
 
 In some cases, the DB and CV names will not match.  For example, the sequence ontology is called **sequence** in the CV table and **SO** in the DB table.  Believe it or not, there's a reason for this: the OBO namespace for the Sequence Ontology is sequence, not SO. 
