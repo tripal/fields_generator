@@ -3,6 +3,7 @@
 namespace StatonLab\FieldGenerator;
 
 class Colors {
+
   /**
    * Holds a list of foreground colors.
    *
@@ -78,7 +79,7 @@ class Colors {
       $colored_string .= $string . "\033[0m";
 
       //$full_string = $colored_padding . PHP_EOL;
-      $full_string =  $colored_string;// . PHP_EOL;
+      $full_string = $colored_string;// . PHP_EOL;
       //$full_string .=  $colored_padding;
     }
     else {

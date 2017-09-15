@@ -1,12 +1,15 @@
 #!/usr/bin/env php
 <?php
+
 // Include the autoloader
-if (file_exists(__DIR__.'/../../autoload.php')) {
-    require __DIR__.'/../../autoload.php';
-} elseif (file_exists(__DIR__.'/vendor/autoload.php')) {
-    require __DIR__.'/vendor/autoload.php';
-} else {
-    require __DIR__.'/src/bootstrap.php';
+if (file_exists(__DIR__ . '/../../autoload.php')) {
+  require __DIR__ . '/../../autoload.php';
+}
+elseif (file_exists(__DIR__ . '/vendor/autoload.php')) {
+  require __DIR__ . '/vendor/autoload.php';
+}
+else {
+  require __DIR__ . '/src/bootstrap.php';
 }
 
 // Define constants
@@ -18,10 +21,10 @@ $prompt = $app->prompt();
 
 // Run the generator
 try {
-    $path = $app->run();
+  $path = $app->run();
 } catch (Exception $exception) {
-    $prompt->error($exception->getMessage());
-    exit(1);
+  $prompt->error($exception->getMessage());
+  exit(1);
 }
 
 // Success!

@@ -12,6 +12,7 @@ use Exception;
 use PDO;
 
 class DB {
+
   /**
    * Database connection.
    *

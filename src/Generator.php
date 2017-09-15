@@ -5,6 +5,7 @@ namespace StatonLab\FieldGenerator;
 use Exception;
 
 class Generator {
+
   /**
    * Field human-readable label.
    *

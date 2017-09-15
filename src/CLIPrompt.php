@@ -9,6 +9,7 @@ namespace StatonLab\FieldGenerator;
  * @package FieldGenerator\Src
  */
 class CLIPrompt {
+
   /**
    * Input File Resource.
    *
@@ -47,7 +48,7 @@ class CLIPrompt {
       $question = $this->applyStyle($question, $style);
     }
 
-   echo $question;
+    echo $question;
     while (empty($response = readline())) {
       $this->error('Please provide a response');
       echo $question;
@@ -102,7 +103,7 @@ class CLIPrompt {
    * @return int The index of the selected option.
    */
   public function askMultipleChoice($question, $options, $style = NULL) {
-    if($style) {
+    if ($style) {
       $question = $this->applyStyle($question, $style);
     }
 

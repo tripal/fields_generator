@@ -3,6 +3,7 @@
 namespace StatonLab\FieldGenerator;
 
 class OptionsParser {
+
   /**
    * Mapped long option => shorthand option.
    *
