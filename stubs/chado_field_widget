@@ -104,22 +104,17 @@ class $$field_name$$_widget extends ChadoFieldWidget {
    * chado.feature_synonym table.  This insert occurs in the widgetFormSubmit
    * function.
    *
-   *  @param $entity_type
-   *    The type of $entity.
-   *  @param $entity
-   *    The entity for the operation.
-   *  @param $field
-   *    The field structure for the operation.
-   *  @param $instance
-   *    The instance structure for $field on $entity's bundle.
-   *  @param $langcode
-   *    The language associated with $items.
-   *  @param $items
-   *    $entity->{$field['field_name']}[$langcode], or an empty array if unset.
-   *  @param $form
+   * @param $form
    *    The submitted form array.
-   *  @param $form_state.
+   * @param $form_state .
    *    The form state array.
+   * @param $entity_type
+   *    The type of $entity.
+   * @param $entity
+   *    The entity for the operation.
+   * @param $langcode
+   *    The language associated with $items.
+   * @param $delta
    */
   public function submit($form, &$form_state, $entity_type, $entity, $langcode, $delta) {
   }
