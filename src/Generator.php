@@ -107,6 +107,11 @@ class Generator {
    */
   protected $options;
 
+  /**
+   * Database connection.
+   *
+   * @var null|\StatonLab\FieldGenerator\DB
+   */
   protected $db = NULL;
 
   /**
@@ -140,7 +145,7 @@ class Generator {
     $this->printIntro();
 
     foreach ($this->questions as $question => $field) {
-      $this->{$field} = $this->prompt->ask($question);
+      $this->{$field} = trim($this->prompt->ask($question));
     }
 
     // Auto construct field name
@@ -151,7 +156,7 @@ class Generator {
 
     $files = $this->generate();
 
-    // TODO: CHECK TERMS AGAINST DB HERE
+    $this->validateTerms();
 
     try {
       return $this->make($files);
@@ -172,6 +177,146 @@ class Generator {
       ])) {
       throw new Exception('Please specify a valid field type. You may choose between chado or tripal. For example, makefield --type=chado.');
     }
+  }
+
+  /**
+   * Validate provided terms in DB.
+   */
+  protected function validateTerms() {
+    $this->prompt->info('Performing DB checks to validate entries ...');
+    $failed = FALSE;
+
+    // Validate DB
+    $count = $this->count('chado.db', 'name', $this->db_name);
+    if ($count <= 0) {
+      $failed = TRUE;
+      $answer = $this->prompt->askBool("The DB \"{$this->db_name}\" does not exist in the chado.db table. Using this value will create a new DB. Are you sure?");
+      if (!$answer) {
+        $this->terminate();
+      }
+    }
+
+    // Validate CV
+    $count = $this->count('chado.cv', 'name', $this->cv_name);
+    if ($count <= 0) {
+      $failed = TRUE;
+      $answer = $this->prompt->askBool("The CV \"{$this->cv_name}\" does not exist in the chado.cv table. Using this value will create a new CV. Are you sure?");
+      if (!$answer) {
+        $this->terminate();
+      }
+    }
+
+    // Validate CV Term
+    $count = $this->count('chado.cvterm', 'name', $this->cv_term);
+    if ($count <= 0) {
+      $failed = TRUE;
+      $answer = $this->prompt->askBool("The CV term \"{$this->cv_term}\" does not exist in the chado.cvterm table. Using this value will create a new CV. Are you sure?");
+      if (!$answer) {
+        $this->terminate();
+      }
+    }
+
+    if (!$failed) {
+      $results = $this->db->query('SELECT CV.name AS cv_name, DB.name AS db_name, DBX.accession AS accession
+                        FROM chado.cvterm AS CVTERM
+                        JOIN  chado.cv AS CV ON CVTERM.cv_id  = CV.cv_id
+                        JOIN  chado.dbxref AS DBX ON CVTERM.dbxref_id = DBX.dbxref_id
+                        JOIN  chado.db AS DB ON DBX.db_id = DB.db_id
+                        WHERE CVTERM.name = :cv_term', [':cv_term' => $this->cv_term])
+                          ->get();
+      $count = count($results);
+      switch ($count) {
+        case 0:
+          $this->prompt->askBool('Warning: the CV, DB, and CVterm are not properly linked through the chado.dbxref table. If this term was manually inserted into the db, remove it before adding the new term.', 'warning');
+          break;
+        case 1:
+          $this->verifyAccession($results[0]);
+          break;
+        default:
+          $this->handleMultiDBXRef($results);
+          break;
+      }
+    }
+
+    $this->prompt->info("Chosen CV Term ID {$this->db_name}:{$this->field_accession} and CV {$this->cv_name}");
+    $this->prompt->info('DB checks succeeded');
+  }
+
+  /**
+   * Verify that the entered accession is equivalent to the one in the DB.
+   *
+   * @param array $result
+   */
+  protected function verifyAccession($result) {
+    if (!$this->checkAccessionInDB($result)) {
+      $answer = $this->prompt->askBool("The accession in chado is {$result['accession']}, which does not match the provided the accession ({$this->field_accession}). Would you like to use {$result['accession']} instead?", 'warning');
+      if ($answer) {
+        $this->field_accession = $result['accession'];
+      }
+    }
+  }
+
+  /**
+   * Handle multiple results from DB.
+   *
+   * @param array $results 2d array of db results.
+   */
+  protected function handleMultiDBXRef($results) {
+    // Create options array.
+    $options = [];
+    $len = count($results);
+    foreach ($results as $result) {
+      $options[] = "ID {$result['db_name']}:{$results['accesion']} and controlled vocabulary {$results['cv_name']}";
+    }
+    $options[] = "None of the above. I'd like to keep my settings.";
+
+    $index = $this->prompt->askMultipleChoice('Multiple links were found to the same CV term. Please select the most accurate CV term from the list below.', $options, 'warning');
+
+    if ($index === $len) {
+      return;
+    }
+
+    $selected = $results[$index];
+
+    $this->field_accession = $selected['accession'];
+    $this->db_name = $selected['db_name'];
+    $this->cv_name = $selected['cv_name'];
+  }
+
+  /**
+   * Checks the accession validity against the DB result.
+   *
+   * @param array $result A single DB result.
+   *
+   * @return bool
+   */
+  protected function checkAccessionInDB($result) {
+    // Wrapped in quotes to make sure both are evaluated as strings
+    return "$this->field_accession" === trim("{$result['accession']}");
+  }
+
+  /**
+   * Get the total count to a query.
+   *
+   * @param $table
+   * @param $condition_column
+   * @param $condition_value
+   *
+   * @return mixed
+   */
+  protected function count($table, $condition_column, $condition_value) {
+    $sql = "SELECT COUNT(*) AS count FROM $table AS DB WHERE DB.{$condition_column} = :condition_column";
+    return $this->db->query($sql, [':condition_column' => $condition_value])
+                    ->count();
+  }
+
+  /**
+   * Terminate the generator.
+   *
+   * @throws \Exception
+   */
+  protected function terminate() {
+    throw new Exception('User Terminated.');
   }
 
   /**

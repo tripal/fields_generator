@@ -60,7 +60,7 @@ class Colors {
   public function str($string, $foreground_color = NULL, $background_color = NULL) {
     $colored_string = '';
     $colored_padding = '';
-    $string = ' ' . $string . ' ';
+    //$string = ' ' . $string . ' ';
     $padding = str_pad('', strlen($string), ' ');;
 
     // Check if given foreground color found
@@ -77,9 +77,9 @@ class Colors {
       // Add string and end coloring
       $colored_string .= $string . "\033[0m";
 
-      $full_string = '  ' . $colored_padding . PHP_EOL;
-      $full_string .= '  ' . $colored_string . PHP_EOL;
-      $full_string .= '  ' . $colored_padding;
+      //$full_string = $colored_padding . PHP_EOL;
+      $full_string =  $colored_string;// . PHP_EOL;
+      //$full_string .=  $colored_padding;
     }
     else {
       $full_string = $colored_string;
