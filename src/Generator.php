@@ -134,7 +134,7 @@ class Generator {
     $this->prompt = new CLIPrompt();
     $this->options = new OptionsParser($this->mapped_options);
     $this->validateOptions();
-    $this->db = new DB($this->options->drupal);
+   // $this->db = new DB($this->options->drupal);
   }
 
   /**
@@ -188,59 +188,59 @@ class Generator {
     $failed = FALSE;
 
     // Validate DB
-    $count = $this->count('chado.db', 'name', $this->db_name);
-    if ($count <= 0) {
-      $failed = TRUE;
-      $answer = $this->prompt->askBool("The DB \"{$this->db_name}\" does not exist in the chado.db table. Using this value will create a new DB. Are you sure?");
-      if (!$answer) {
-        $this->terminate();
-      }
-    }
+    //$count = $this->count('chado.db', 'name', $this->db_name);
+    //if ($count <= 0) {
+    //  $failed = TRUE;
+    //  $answer = $this->prompt->askBool("The DB \"{$this->db_name}\" does not exist in the chado.db table. Using this value will create a new DB. Are you sure?");
+    //  if (!$answer) {
+    //    $this->terminate();
+    //  }
+    //}
 
     // Validate CV
-    $count = $this->count('chado.cv', 'name', $this->cv_name);
-    if ($count <= 0) {
-      $failed = TRUE;
-      $answer = $this->prompt->askBool("The CV \"{$this->cv_name}\" does not exist in the chado.cv table. Using this value will create a new CV. Are you sure?");
-      if (!$answer) {
-        $this->terminate();
-      }
-    }
+    //$count = $this->count('chado.cv', 'name', $this->cv_name);
+    //if ($count <= 0) {
+    //  $failed = TRUE;
+    //  $answer = $this->prompt->askBool("The CV \"{$this->cv_name}\" does not exist in the chado.cv table. Using this value will create a new CV. Are you sure?");
+    //  if (!$answer) {
+    //    $this->terminate();
+    //  }
+    //}
 
     // Validate CV Term
-    $count = $this->count('chado.cvterm', 'name', $this->cv_term);
-    if ($count <= 0) {
-      $failed = TRUE;
-      $answer = $this->prompt->askBool("The CV term \"{$this->cv_term}\" does not exist in the chado.cvterm table. Using this value will create a new CV. Are you sure?");
-      if (!$answer) {
-        $this->terminate();
-      }
-    }
+    //$count = $this->count('chado.cvterm', 'name', $this->cv_term);
+    //if ($count <= 0) {
+    //  $failed = TRUE;
+    //  $answer = $this->prompt->askBool("The CV term \"{$this->cv_term}\" does not exist in the chado.cvterm table. Using this value will create a new CV. Are you sure?");
+    //  if (!$answer) {
+    //    $this->terminate();
+    //  }
+    //}
 
-    if (!$failed) {
-      $results = $this->db->query('SELECT CV.name AS cv_name, DB.name AS db_name, DBX.accession AS accession
-                        FROM chado.cvterm AS CVTERM
-                        JOIN  chado.cv AS CV ON CVTERM.cv_id  = CV.cv_id
-                        JOIN  chado.dbxref AS DBX ON CVTERM.dbxref_id = DBX.dbxref_id
-                        JOIN  chado.db AS DB ON DBX.db_id = DB.db_id
-                        WHERE CVTERM.name = :cv_term', [':cv_term' => $this->cv_term])
-                          ->get();
-      $count = count($results);
-      switch ($count) {
-        case 0:
-          $this->prompt->askBool('Warning: the CV, DB, and CVterm are not properly linked through the chado.dbxref table. If this term was manually inserted into the db, remove it before adding the new term.', 'warning');
-          break;
-        case 1:
-          $this->verifyAccession($results[0]);
-          break;
-        default:
-          $this->handleMultiDBXRef($results);
-          break;
-      }
-    }
+    //if (!$failed) {
+    //  $results = $this->db->query('SELECT CV.name AS cv_name, DB.name AS db_name, DBX.accession AS accession
+    //                    FROM chado.cvterm AS CVTERM
+    //                    JOIN  chado.cv AS CV ON CVTERM.cv_id  = CV.cv_id
+    //                    JOIN  chado.dbxref AS DBX ON CVTERM.dbxref_id = DBX.dbxref_id
+    //                    JOIN  chado.db AS DB ON DBX.db_id = DB.db_id
+    //                    WHERE CVTERM.name = :cv_term', [':cv_term' => $this->cv_term])
+    //                      ->get();
+    //  $count = count($results);
+    //  switch ($count) {
+    //    case 0:
+    //      $this->prompt->askBool('Warning: the CV, DB, and CVterm are not properly linked through the chado.dbxref table. If this term was manually inserted into the db, remove it before adding the new term.', 'warning');
+    //      break;
+    //    case 1:
+    //      $this->verifyAccession($results[0]);
+    //      break;
+    //    default:
+    //      $this->handleMultiDBXRef($results);
+    //      break;
+    //  }
+    //}
 
-    $this->prompt->info("Chosen CV Term ID {$this->db_name}:{$this->field_accession} and CV {$this->cv_name}");
-    $this->prompt->info('DB checks succeeded');
+    //$this->prompt->info("Chosen CV Term ID {$this->db_name}:{$this->field_accession} and CV {$this->cv_name}");
+    //$this->prompt->info('DB checks succeeded');
   }
 
   /**
@@ -307,8 +307,8 @@ class Generator {
    */
   protected function count($table, $condition_column, $condition_value) {
     $sql = "SELECT COUNT(*) AS count FROM $table AS DB WHERE DB.{$condition_column} = :condition_column";
-    return $this->db->query($sql, [':condition_column' => $condition_value])
-                    ->count();
+  //  return $this->db->query($sql, [':condition_column' => $condition_value])
+ //                   ->count();
   }
 
   /**
