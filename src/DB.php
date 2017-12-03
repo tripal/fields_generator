@@ -48,13 +48,22 @@ class DB {
    */
   protected $sql;
 
+/**
+* True if DB is not connected.
+*
+*/
+  protected $unconnected;
+
+
   /**
    * DB constructor.
    */
   public function __construct($drupal_path = NULL) {
     $settings = $this->getSettingsFilePath($drupal_path);
-    $this->readSettings($settings);
-    $this->createConnection();
+    if ($settings) {
+      $this->readSettings($settings);
+      $this->createConnection();
+    }
   }
 
   /**
@@ -84,11 +93,18 @@ class DB {
     $settings = "{$drupal_root}/sites/default/settings.php";
 
     if (!file_exists($settings)) {
-      throw  new Exception("The settings file at $settings does not exist.");
+
+      $this->unconnected = true;
+    
+      return null;
+     // throw  new Exception("The settings file at $settings does not exist.");
     }
 
     if (!is_readable($settings)) {
-      throw new Exception("The settings file at $settings is not readable.");
+            $this->unconnected = true;
+
+      return null;
+     // throw new Exception("The settings file at $settings is not readable.");
     }
 
     return $settings;
@@ -152,4 +168,13 @@ class DB {
   public function count() {
     return intval($this->get()[0]['count']);
   }
+
+
+/**
+*Inform generator if there is no DB connection
+*
+*/
+public function checkOffline() {
+  return $this->unconnected;
+}
 }
