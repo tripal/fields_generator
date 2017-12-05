@@ -187,6 +187,13 @@ class Generator {
     $this->prompt->info('Performing DB checks to validate entries ...');
     $failed = FALSE;
 
+    //if no connection, run anyway but let the user know
+    if ($this->db->checkOffline()) {
+          $this->prompt->info('No valid DB connection.  Continuing without querying terms against the DB.');
+          $this->prompt->info("Chosen CV Term ID {$this->db_name}:{$this->field_accession} and CV {$this->cv_name}");
+      return;
+    }
+
     // Validate DB
     $count = $this->count('chado.db', 'name', $this->db_name);
     if ($count <= 0) {
