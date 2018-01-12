@@ -11,7 +11,7 @@ The easiest way to install **Tripal Fields Generator** is using [Composer](https
 
 **Install command**
 ```shell
-composer global require statonlab/fields_generator
+composer global require "statonlab/fields_generator:~0.1"
 ```
 **Update command**
 ```shell
