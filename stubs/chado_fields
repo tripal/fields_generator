@@ -37,7 +37,7 @@ function $$module_name$$_bundle_fields_info($entity_type, $bundle) {
   // Because we are expecting data housed in Chado we can use the 'data_table'
   // property of the bundle to determine if this bundle is really the one
   // we want the field to be associated with.
-  if (isset($bundle->data_table) AND ($bundle->data_table == 'organism')) {
+  if (isset($bundle->data_table) AND ($bundle->data_table == $my_data_table)) {
     // First add my term.
     tripal_insert_cvterm(array(
       'id' => '$$db_name$$:$$field_accession$$',
@@ -88,9 +88,7 @@ function $$module_name$$_bundle_fields_info($entity_type, $bundle) {
 function $$module_name$$_bundle_instances_info($entity_type, $bundle) {
   $instances = array();
 
-  // ORGANISM.
-  //===============
-  if (isset($bundle->data_table) AND ($bundle->data_table == 'organism')) {
+  if (isset($bundle->data_table) AND ($bundle->data_table == $my_data_table)) {
     $field_name = '$$field_name$$';
     $field_type = '$$field_name$$';
     $instances[$field_name] =  array(
