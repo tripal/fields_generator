@@ -145,7 +145,7 @@ class Generator
         $this->options = new OptionsParser($this->mapped_options);
         $this->validateOptions();
         $this->pathFinder = new PathFinder($this->options->drupal);
-        if($this->pathFinder->getRoot()) {
+        if ($this->pathFinder->getRoot()) {
             $this->db = new DB($this->pathFinder->getRoot());
         } else {
             $this->db = new DB($this->options->drupal);
@@ -162,6 +162,7 @@ class Generator
     {
         $this->printIntro();
 
+        // Ask the question
         foreach ($this->questions as $question => $field) {
             $this->{$field} = trim($this->prompt->ask($question));
         }

@@ -12,7 +12,9 @@
             "email": "bcondon@utk.edu"
         }
     ],
-    "require": {},
+    "require": {
+        "statonlab/fields_generator": "^0.1.6"
+    },
     "autoload": {
         "psr-4": {
             "StatonLab\\FieldGenerator\\": "src/"
