@@ -9,7 +9,7 @@ Ontologies take this a step further.  Where CVs were controlled lists of CVterms
 
 Tripal leverages this system to make way for the future of the symantic web.  Because every bundle and field you define in Tripal will be associated with a CVterm, it's important to use the [EMBL-EBI Ontology Lookup Service](http://www.ebi.ac.uk/ols/index) and to think carefully about the terms you use to describe your objects.  It's also important to understand how Chado and Tripal utilize these CVs and to be aware of some of the trickier cases.
 
-CVs are defined in two tables in chado: DB and CV.  As you'll see below, in the simplest example, DB will be the same as CV. The terms themselves exist in CVterm.  The CVterm table has a foreign key to CV (CV\_id) and a foreign key to DB (dbxref\_id): this is how DB and CV are indirectly linked.
+CVs are defined in two tables in chado: DB and CV.  As you'll see below, in the simplest example, DB will be the same as CV. The terms themselves exist in CVterm.  The CVterm table has a foreign key to CV (CV\_id) and a foreign key to DB (dbxref\_id): this is how DB and CV are indirectly linked.  The term accession will always take the form of DB:accession.  This is why Chado juggles the CV and DB sometimes: it needs to consistently build URL linkouts that will go to that term in the right vocabulary.  
 
 In some cases, the DB and CV names will not match.  For example, the sequence ontology is called **sequence** in the CV table and **SO** in the DB table.  Believe it or not, there's a reason for this: the OBO namespace for the Sequence Ontology is sequence, not SO. 
 
@@ -51,17 +51,50 @@ Defining the default instance is also simple.
   
 ```
 
-As noted above, even some simple ontologies do not have the same value in db and cv.  The Sequence Ontology is `sequence` in the cv table and `SO` in the db table: you can see this in the EBI entry below.  The term [**repeat unit**](http://www.ebi.ac.uk/ols/ontologies/so/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FSO_0000726) demonstrates this.  The `has obo namespace` value overwrites the DB value in the teal box. 
 
- ![SO repeat unit](assets/SO_repeat_unit.png)
+### Slightly less simple: Sequence Ontology
 
+If you refer to the guide in README.md, the Sequence ontology is **SO** for DB and **sequence** for CV in chado.  Why is that?
+
+Consider the entry for [CDS](https://www.ebi.ac.uk/ols/ontologies/so/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FSO_0000316).  Both the teal and orange box use SO, so shouldn't the DB and CV be SO as well?  In this case, the `has_obo_namespace` tag set to **sequence** in the righthand box throws it off. The OBO namespace overwrites the CV name.
+
+![a sequence notology term](/assets/so_cds_example.png)
+
+The resulting insert statement:
+
+
+
+```
+    $term= tripal_insert_cvterm([
+            'id' => 'SO:0000316',
+            'name' => 'CDS',
+            'cv_name' => 'sequence',
+            'definition' => 'A contiguous sequence which begins with, and includes, a start codon and ends with, and includes, a stop codon. [ http://www.sequenceontology.org/browser/current_svn/term/SO:ma ].',
+        ]);
+
+```
+
+Defining the default instance is also simple.
+
+```
+ public static $default_instance_settings  = array(
+// Vocabulary here refers to the db entry.
+    'term_vocabulary' => 'SO',
+    'term_name' => 'CDS',
+    'term_accession' => '0000316',
+  
+```
+
+Finally our field file would be named `so__cds.inc`.
+
+Don't get mixed up when the instance asks for `term_vocabulary`!  As far as **Chado** is concerned, the `term_vocabulary` is the database.
 
 
 ### Medium difficulty: GO
 
 Many ontologies are broken up into sub-ontologies.  This includes the Gene Ontology (GO) and The Encyclopedia of Genes and Genomes (KEGG), the two most popular ontologies for describing the function, location, and activities of genes and gene products.
 
-Let's consider the example GO term [**cell aggregation**](http://www.ebi.ac.uk/ols/ontologies/go/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FGO_0098743).  Looking at the EBI entry, the teal box is `GO`, the orange box is `GO:0098743`, and the has obo namespace is `biological_process.
+Let's consider the example GO term [**cell aggregation**](http://www.ebi.ac.uk/ols/ontologies/go/terms?iri=http%3A%2F%2Fpurl.obolibrary.org%2Fobo%2FGO_0098743).  Looking at the EBI entry, the teal box is `GO`, the orange box is `GO:0098743`, and the has obo namespace is `biological_process`.
 
 ![GO cell aggregation](assets/GO_cell_aggregation.png)
 
@@ -97,7 +130,7 @@ If this term described a field, our files would be named `go__cell_aggregation`.
 
 ```
 
-###  EDAM
+###  The exception: EDAM
 
 EDAM builds its term accessions using the subontology instead of the ontology.  Consider the [EDAM term for sequence](http://www.ebi.ac.uk/ols/ontologies/edam/terms?iri=http%3A%2F%2Fedamontology.org%2Fdata_2044). 
  
@@ -119,7 +152,7 @@ $term= tripal_insert_cvterm([
 
 ```
 
-For the field, the the `term_vocabulary` is the **subvocabulary** data, which is the DB table value.
+For the field, the the `term_vocabulary` is the **subvocabulary** data, which is, as always, the DB table value.
 
 ```
  public static $default_instance_settings = [
@@ -151,4 +184,6 @@ $term= tripal_insert_cvterm([
         ]);
 
 ```
+
+Sometimes a good CVterm just doesn't exist for what you want to describe.  In these cases, before you use a local term, ask yourself if there is a **more general way** of describing your term.  If that doesn't help, consider contributing the term to an existing CV or ontology.
 
