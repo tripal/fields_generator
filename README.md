@@ -1,6 +1,9 @@
 # Tripal Fields Generator
 This is a CLI tool to help automate the generation of [Tripal fields](http://tripal.info/tutorials/v3.x/developers_handbook/custom_field) for use in [Tripal 3](http://tripal.info/) development.  We highly recommend you read the developer handbook before attempting to use this tool.  It supports creating both Tripal and Chado fields.
 
+
+![TFG hearthstone logo](/assets/TFG.png)
+
 ## Documentation
 
 ### Installation
@@ -143,3 +146,6 @@ Contributions are highly welcomed and recommended.
 
 ## License
 This tool is licensed under [GNU GPLv2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html). Copyright 2017 [University of Tennessee](https://utk.edu). All rights reserved.
+
+The Tripal Fields Generator "logo" is derived from the collectible card game Hearthstone, copyright © Blizzard Entertainment, Inc. Hearthstone® is a registered trademark of Blizzard Entertainment, Inc. Tripal Fields Generator is not affiliated or associated with or endorsed by Hearthstone® or Blizzard Entertainment, Inc.
+
