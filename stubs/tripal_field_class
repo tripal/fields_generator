@@ -31,6 +31,13 @@ class $$field_name$$ extends TripalField {
   // The module that manages this field.
   public static $module = '$$module_name$$';
 
+  // Indicates the download formats for this field.  The list must be the
+  // name of a child class of the TripalFieldDownloader.
+  public static $download_formatters = array(
+     'TripalTabDownloader',
+     'TripalCSVDownloader',
+  ),
+
   // A list of global settings. These can be accessed within the
   // globalSettingsForm.  When the globalSettingsForm is submitted then
   // Drupal will automatically change these settings for all fields.
@@ -64,13 +71,6 @@ class $$field_name$$ extends TripalField {
     // Set to TRUE if the site admin is not allowed to change the term
     // type, otherwise the admin can change the term mapped to a field.
     'term_fixed' => FALSE,
-
-       // Indicates the download formats for this field.  The list must be the
-    // name of a child class of the TripalFieldDownloader.
-    'download_formatters' => array(
-      'TripalTabDownloader',
-      'TripalCSVDownloader',
-    ),
 
     // Indicates if this field should be automatically attached to display
     // or web services or if this field should be loaded separately. This

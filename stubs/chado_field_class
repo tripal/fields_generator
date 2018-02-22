@@ -49,6 +49,13 @@ class $$field_name$$ extends ChadoField {
      'searchable_keys' => array(),
   );
 
+  // Indicates the download formats for this field.  The list must be the
+  // name of a child class of the TripalFieldDownloader.
+  public static $download_formatters = array(
+     'TripalTabDownloader',
+     'TripalCSVDownloader',
+  ),
+
   // Provide a list of instance specific settings. These can be access within
   // the instanceSettingsForm.  When the instanceSettingsForm is submitted
   // then Drupal with automatically change these settings for the instance.
@@ -78,12 +85,6 @@ class $$field_name$$ extends ChadoField {
     'chado_column' => '',
     // The base table.
     'base_table' => '',
-     // Indicates the download formats for this field.  The list must be the
-    // name of a child class of the TripalFieldDownloader.
-    'download_formatters' => array(
-      'TripalTabDownloader',
-      'TripalCSVDownloader',
-    ),
   );
 
   // A boolean specifying that users should not be allowed to create
