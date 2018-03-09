@@ -1,0 +1,7 @@
+language: php
+
+sudo: required
+
+script:
+- composer install
+- phpunit
