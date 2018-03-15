@@ -170,7 +170,10 @@ class Generator
         // Auto construct field name
         $lower = strtolower($this->db_name);
 
-        $this->field_name = "{$lower}__{$this->cv_term}";
+        $term_name_machine = strtolower($this->cv_term);
+        $term_name_machine = str_replace(" ", "_", $term_name_machine);
+
+        $this->field_name = "{$lower}__{$term_name_machine}";
         $this->questions[$this->field_name] = 'field_name';
 
         $files = $this->generate();
