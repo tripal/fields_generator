@@ -60,6 +60,13 @@ class CLIPrompt
         return $response;
     }
 
+    /**
+     * Wrapper around text style.
+     *
+     * @param string $str Line to print
+     * @param string $style One of: danger, warning, error, or info.
+     * @return string
+     */
     protected function applyStyle($str, $style)
     {
         switch ($style) {
