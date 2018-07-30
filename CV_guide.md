@@ -1,6 +1,6 @@
-
-
 # GUIDE TO ACCESSIONS AND CVS
+
+This guide has been integrated into the [Tripal developer's handbook, found here](http://tripal.info/tutorials/v3.x/developers_handbook/custom-field/vocabulary).
 
 ## Ontologies: what and why?
 Tripal 3 requires all bundles and fields to be associated with a Controlled Vocabulary (CV).  CVs are dictionaries of defined terms (CVterms) that make data machine-accessible, ensuring uniform terms are used across experiments, organisms and websites.  Without CVterms, our scientific knowledge might be split by "dialects".  Plant biologists might study temperature stress, while animal biologists study heat shock.  Each group might benefit from the knowledge of the other, but they use a different vocabulary to describe the same thing, so they never discover eachother's findings.  CVterms make this easier not just for people, but especially for machines.
@@ -9,7 +9,7 @@ Ontologies take this a step further.  Where CVs were controlled lists of CVterms
 
 Tripal leverages this system to make way for the future of the symantic web.  Because every bundle and field you define in Tripal will be associated with a CVterm, it's important to use the [EMBL-EBI Ontology Lookup Service](http://www.ebi.ac.uk/ols/index) and to think carefully about the terms you use to describe your objects.  It's also important to understand how Chado and Tripal utilize these CVs and to be aware of some of the trickier cases.
 
-CVs are defined in two tables in chado: DB and CV.  As you'll see below, in the simplest example, DB will be the same as CV. The terms themselves exist in CVterm.  The CVterm table has a foreign key to CV (CV\_id) and a foreign key to DB (dbxref\_id): this is how DB and CV are indirectly linked.  The term accession will always take the form of DB:accession.  This is why Chado juggles the CV and DB sometimes: it needs to consistently build URL linkouts that will go to that term in the right vocabulary.  
+CVs are defined in two tables in Chado: DB and CV.  As you'll see below, in the simplest example, DB will be the same as CV. The terms themselves exist in CVterm.  The CVterm table has a foreign key to CV (CV\_id) and a foreign key to DB (dbxref\_id): this is how DB and CV are indirectly linked.  The term accession will always take the form of DB:accession.  This is why Chado juggles the CV and DB sometimes: it needs to consistently build URL linkouts that will go to that term in the right vocabulary.  
 
 In some cases, the DB and CV names will not match.  For example, the sequence ontology is called **sequence** in the CV table and **SO** in the DB table.  Believe it or not, there's a reason for this: the OBO namespace for the Sequence Ontology is sequence, not SO. 
 
