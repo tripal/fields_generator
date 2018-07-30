@@ -3,7 +3,7 @@
 
 
 # Tripal Fields Generator
-This is a CLI tool to help automate the generation of [Tripal fields](http://tripal.info/tutorials/v3.x/developers_handbook/custom_field) for use in [Tripal 3](http://tripal.info/) development.  We highly recommend you read the developer handbook before attempting to use this tool.  It supports creating both Tripal and Chado fields.
+This is a CLI tool to help automate the generation of [Tripal fields](http://tripal.info/tutorials/v3.x/developers_handbook/custom-field) for use in [Tripal 3](http://tripal.info/) development.  We highly recommend you read the developer handbook before attempting to use this tool.  It supports creating both Tripal and Chado fields.
 
 
 ![TFG hearthstone logo](/assets/TFG.png)
