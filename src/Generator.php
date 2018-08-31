@@ -177,6 +177,13 @@ class Generator
 
         $this->questions[$this->field_name] = 'field_name';
 
+        if (strlen($this->field_name) > 32){
+            //Drupal cant deal with field names longer than 32 characters
+            throw new Exception(
+                'Your field\'s machine name: '. $this->field_name . ' is ' . strlen($this->field_name) . " long: the maximum is 32 characters.\n"
+            );
+        }
+
         $files = $this->generate();
 
         $this->validateTerms();
@@ -206,16 +213,6 @@ class Generator
                 'Please specify a valid field type. You may choose between chado or tripal. For example, makefield --type=chado.'
             );
         }
-
-        if (strlen($this->field_name) > 32){
-          //Drupal cant deal with field names longer than 32 characters
-          throw new Exception(
-              'Your field\'s machine name: '. $this->field_name . ' is ' . (str) length($this->field_name) . " long: the maximum is 32 characters.\n";
-          );
-        //  $this->terminate();
-
-        }
-
     }
 
     /**
