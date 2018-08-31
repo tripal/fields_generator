@@ -180,7 +180,7 @@ class Generator
         if (strlen($this->field_name) > 32){
             //Drupal cant deal with field names longer than 32 characters
             throw new Exception(
-                'Your field\'s machine name: '. $this->field_name . ' is ' . strlen($this->field_name) . " long: the maximum is 32 characters.\n"
+                'Your field\'s machine name: '. $this->field_name . ' is ' . strlen($this->field_name) . " characters long: the maximum is 32 characters.\n"
             );
         }
 
