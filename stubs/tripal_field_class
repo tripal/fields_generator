@@ -36,7 +36,7 @@ class $$field_name$$ extends TripalField {
   public static $download_formatters = array(
      'TripalTabDownloader',
      'TripalCSVDownloader',
-  ),
+  );
 
   // A list of global settings. These can be accessed within the
   // globalSettingsForm.  When the globalSettingsForm is submitted then
