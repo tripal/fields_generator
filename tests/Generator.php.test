@@ -9,11 +9,12 @@ class GeneratorEngineTest extends TestCase {
 	private $generator;
 
 protected function setUp() {
-
+parent::setUp();
 $this->generator = new StatonLab\FieldGenerator\Generator();
 }
  protected function tearDown()
     {
+			parent::tearDown();
         $this->generator = NULL;
     }
 
