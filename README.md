@@ -1,5 +1,4 @@
-
-[![Build Status](https://travis-ci.org/statonlab/fields_generator.svg?branch=master)](https://travis-ci.org/statonlab/fields_generator) [![DOI](https://zenodo.org/badge/100748258.svg)](https://zenodo.org/badge/latestdoi/100748258)
+[![Build Status](https://travis-ci.org/tripal/fields_generator.svg?branch=master)](https://travis-ci.org/tripal/fields_generator) [![DOI](https://zenodo.org/badge/100748258.svg)](https://zenodo.org/badge/latestdoi/100748258)
 
 
 # Tripal Fields Generator
