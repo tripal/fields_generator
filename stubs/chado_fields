@@ -104,8 +104,8 @@ function $$module_name$$_bundle_instances_info($entity_type, $bundle) {
         'term_accession' => '$$field_accession$$',
         'auto_attach' => FALSE,
         'chado_table' => $bundle->data_table,
-        'chado_column' => 'organism_id',
-        'base_table' => $bundle->data_table,
+        'chado_column' => null,
+        'base_table' => null,
       ),
       'widget' => array(
         'type' => '$$field_name$$_widget',
